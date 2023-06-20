@@ -1,0 +1,6 @@
+*.o
+Makefile
+*.txt
+.qmake.stash
+test
+*.swp
