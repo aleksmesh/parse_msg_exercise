@@ -4,16 +4,15 @@
 #include <stdint.h>
 #include <stdio.h>
 
-struct input_msg_t {
+typedef struct input_msg_s {
   uint8_t type;
   uint8_t length;
   char msg[255];
   uint32_t crc32;
   uint32_t mask;
-};
-typedef struct input_msg_t input_msg;
+} input_msg_t;
 
-struct output_msg_t {
+typedef struct output_msg_s {
   uint8_t type;
   uint8_t length;
   char msg[255];
@@ -21,13 +20,12 @@ struct output_msg_t {
   uint8_t length_mod;
   char msg_masked[255];
   uint8_t crc32_mod;
-};
-typedef struct output_msg_t output_msg;
+} output_msg_t;
 
-int parse_next_message(FILE* input, input_msg* msg );
+int parse_next_message(FILE* input, input_msg_t* msg );
 
-int convert_message(input_msg* msg_in, output_msg* msg_out);
+int convert_message(const input_msg_t* msg_in, output_msg_t* msg_out);
 
-int save_message(FILE* output, output_msg* msg);
+int save_message(FILE* output, const output_msg_t* msg);
 
 #endif

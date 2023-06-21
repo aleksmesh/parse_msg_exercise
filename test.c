@@ -32,8 +32,8 @@ int main() {
     return EXIT_FAILURE;
   }
 
-  input_msg msg_in = {0};
-  output_msg msg_out = {0};
+  input_msg_t msg_in = {0};
+  output_msg_t msg_out = {0};
   int msg_count = 0;
   while (0 < parse_next_message(input, &msg_in)) {
     if(!convert_message(&msg_in, &msg_out)) {

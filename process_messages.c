@@ -4,7 +4,7 @@
 
 #include <string.h>
 
-int parse_next_message(FILE* input, input_msg* msg )
+int parse_next_message(FILE* input, input_msg_t* msg )
 {
   char chunk[START_LENGTH];
   int res = fread(chunk, 1, START_LENGTH, input);
@@ -52,7 +52,7 @@ int parse_next_message(FILE* input, input_msg* msg )
   return (0 == feof(input) && 0 == ferror(input));
 }
 
-int convert_message(input_msg* msg_in, output_msg* msg_out)
+int convert_message(const input_msg_t* msg_in, output_msg_t* msg_out)
 {
   if (crc32(msg_in->msg, msg_in->length) != msg_in->crc32) {
     fprintf(err_log, "msg crc32 error!");
@@ -80,7 +80,7 @@ int convert_message(input_msg* msg_in, output_msg* msg_out)
   return 1;
 }
 
-int save_message(FILE* output, output_msg* msg)
+int save_message(FILE* output, const output_msg_t* msg)
 {
   fputc(msg->type, output);
   fputc(msg->length, output);
